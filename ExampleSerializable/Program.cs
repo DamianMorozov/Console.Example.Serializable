@@ -94,22 +94,20 @@ namespace ExampleSerializable
             var persons = GetPersons();
             Console.WriteLine("var persons = GetPersons();");
 
+            var formatter = new BinaryFormatter();
+            Console.WriteLine("var formatter = new BinaryFormatter();");
             using (var fs = new FileStream("persons.dat", FileMode.OpenOrCreate))
             {
                 Console.WriteLine("using (var fs = new FileStream(\"persons.dat\", FileMode.OpenOrCreate))");
-                var formatter = new BinaryFormatter();
-                Console.WriteLine("var formatter = new BinaryFormatter();");
-                formatter.Serialize(fs, persons);
                 try
                 {
                     formatter.Serialize(fs, persons);
+                    Console.WriteLine("formatter.Serialize(fs, people);");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-                    throw;
                 }
-                Console.WriteLine("formatter.Serialize(fs, people);");
             }
         }
 
@@ -117,11 +115,11 @@ namespace ExampleSerializable
         {
             Console.WriteLine("Deserialize.");
 
+            var formatter = new BinaryFormatter();
+            Console.WriteLine("var formatter = new BinaryFormatter();");
             using (var fs = new FileStream("persons.dat", FileMode.OpenOrCreate))
             {
                 Console.WriteLine("using (var fs = new FileStream(\"persons.dat\", FileMode.OpenOrCreate))");
-                var formatter = new BinaryFormatter();
-                Console.WriteLine("var formatter = new BinaryFormatter();");
                 try
                 {
                     var persons = (ClassPerson[])formatter.Deserialize(fs);
@@ -134,7 +132,6 @@ namespace ExampleSerializable
                 catch (Exception e)
                 {
                     Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-                    throw;
                 }
             }
         }
@@ -158,11 +155,11 @@ namespace ExampleSerializable
             var addresses = GetAddresses();
             Console.WriteLine("var addresses = GetAddresses();");
 
+            var formatter = new SoapFormatter();
+            Console.WriteLine("var formatter = new SoapFormatter();");
             using (var fs = new FileStream("addresses.dat", FileMode.OpenOrCreate))
             {
                 Console.WriteLine("using (var fs = new FileStream(\"addresses.dat\", FileMode.OpenOrCreate))");
-                var formatter = new SoapFormatter();
-                Console.WriteLine("var formatter = new SoapFormatter();");
                 try
                 {
                     formatter.Serialize(fs, addresses);
@@ -171,7 +168,6 @@ namespace ExampleSerializable
                 catch (Exception e)
                 {
                     Console.WriteLine("Failed to serialize. Reason: " + e.Message);
-                    throw;
                 }
             }
         }
@@ -180,11 +176,11 @@ namespace ExampleSerializable
         {
             Console.WriteLine("Deserialize.");
 
+            var formatter = new SoapFormatter();
+            Console.WriteLine("var formatter = new SoapFormatter();");
             using (var fs = new FileStream("addresses.dat", FileMode.OpenOrCreate))
             {
                 Console.WriteLine("using (var fs = new FileStream(\"addresses.dat\", FileMode.OpenOrCreate))");
-                var formatter = new SoapFormatter();
-                Console.WriteLine("var formatter = new SoapFormatter();");
                 try
                 {
                     var addresses = (Hashtable)formatter.Deserialize(fs);
@@ -197,7 +193,6 @@ namespace ExampleSerializable
                 catch (Exception e)
                 {
                     Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-                    throw;
                 }
             }
         }
